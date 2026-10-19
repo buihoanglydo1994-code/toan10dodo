@@ -1,8 +1,640 @@
-<!doctype html><html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Khám phá Vectơ | Toán 10</title><style>:root{font-family:system-ui,-apple-system,Segoe UI,sans-serif;color:#18304b;background:#f2f6fc}*{box-sizing:border-box}body{margin:0}header{background:linear-gradient(120deg,#103b78,#087f9b);color:white;padding:32px max(20px,calc((100% - 1100px)/2))}header h1{font-size:clamp(30px,5vw,48px);margin:8px 0}header p{opacity:.92}.wrap{max-width:1100px;margin:auto;padding:20px}.tabs{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0 22px}.tabs button,.btn{border:0;background:white;border-radius:10px;padding:12px 17px;font-weight:700;color:#20517c;cursor:pointer}.tabs button.active,.btn.primary{background:#176bc1;color:white}.card{background:white;padding:24px;border-radius:16px;box-shadow:0 5px 25px #17457413;margin-bottom:18px}.card h2{margin-top:0}.panel{display:none}.panel.active{display:block}.formula{background:#edf5ff;border-radius:10px;padding:15px;margin:14px 0;text-align:center;font-size:21px;color:#104b91}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}.graph{max-width:600px;width:100%;border:1px solid #e4eaf1;border-radius:12px;touch-action:none;background:white}input[type=range]{width:100%}.options button{display:block;text-align:left;width:100%;background:#f1f6fd;border:2px solid transparent;border-radius:10px;padding:12px;margin:9px 0;cursor:pointer}.options button.selected{border-color:#1974c9}.muted{color:#63758c}.tag{background:#e3f2ff;color:#1b568c;padding:6px 10px;border-radius:20px;font-size:13px}.feedback{font-weight:700;margin:12px 0}footer{text-align:center;padding:24px;color:#65758a}@media(max-width:600px){.card{padding:16px}.wrap{padding:12px}}</style></head><body><header><div class="tag" style="display:inline-block">WEBSITE HỌC TẬP TƯƠNG TÁC</div><h1>KHÁM PHÁ VECTƠ</h1><p>Toán 10 · Học bằng trực quan · Thực hành · Vận dụng</p></header><main class="wrap"><nav class="tabs" aria-label="Chuyên mục"><button class="active" data-tab="theory">📖 Kiến thức</button><button data-tab="explore">📐 Khám phá</button><button data-tab="operations">➕ Phép toán</button><button data-tab="quiz">✍️ Trắc nghiệm</button><button data-tab="real">🚀 Thực tiễn</button></nav><section class="panel active" id="theory"><article class="card"><h2>1. Vectơ là gì?</h2><p>Vectơ là một đoạn thẳng có hướng. Vectơ AB có điểm đầu A, điểm cuối B và độ dài bằng độ dài đoạn thẳng AB.</p><div class="formula">→AB &nbsp; |→AB| = AB</div><p><b>Hai vectơ cùng phương:</b> Giá của chúng song song hoặc trùng nhau.</p><p><b>Hai vectơ bằng nhau:</b> Cùng hướng và cùng độ dài.</p><p><b>Vectơ đối:</b> Cùng độ dài và ngược hướng.</p><p><b>Vectơ không:</b> Có điểm đầu trùng điểm cuối.</p></article><article class="card"><h2>2. Công thức trọng tâm</h2><div class="grid"><div class="formula">→AB + →BC = →AC</div><div class="formula">a⃗ − b⃗ = a⃗ + (−b⃗)</div><div class="formula">a⃗·b⃗ = |a⃗||b⃗|cos α</div><div class="formula">|(x; y)| = √(x² + y²)</div></div><p class="muted">Trong công thức tích vô hướng, α là góc giữa hai vectơ khác vectơ không.</p></article></section><section class="panel" id="explore"><article class="card"><h2>Phòng thí nghiệm vectơ</h2><p>Kéo hai điểm A, B trên mặt phẳng tọa độ để khám phá tọa độ và độ dài vectơ AB.</p><svg class="graph" id="graph" viewBox="0 0 360 340" aria-label="Đồ thị vectơ kéo thả"></svg><div class="formula" id="coord"></div><button class="btn primary" id="reset">Đặt lại</button><p class="muted">Quy tắc: tọa độ vectơ AB bằng tọa độ B trừ tọa độ A.</p></article></section><section class="panel" id="operations"><article class="card"><h2>Thử nghiệm các phép toán</h2><p>Điều chỉnh tọa độ hai vectơ và quan sát kết quả.</p><div class="grid" id="controls"></div><p><button class="btn primary" data-op="add">a⃗ + b⃗</button> <button class="btn" data-op="sub">a⃗ − b⃗</button> <button class="btn" data-op="dot">a⃗ · b⃗</button></p><svg class="graph" id="opgraph" viewBox="0 0 360 340"></svg><div class="formula" id="opresult"></div><p class="muted">Màu xanh dương: a⃗ · Màu cam: b⃗ · Màu xanh lá: vectơ kết quả. Các vectơ vượt ngoài khung sẽ được thu nhỏ đồng đều để hiển thị.</p></article></section><section class="panel" id="quiz"><article class="card"><h2>Kiểm tra kiến thức</h2><span class="tag" id="progress"></span><h3 id="question"></h3><div class="options" id="options"></div><div class="feedback" id="feedback" aria-live="polite"></div><button class="btn primary" id="check">Kiểm tra</button> <button class="btn" id="next" hidden>Câu tiếp theo →</button> <button class="btn" id="again" hidden>Làm lại</button></article></section><section class="panel" id="real"><article class="card"><h2>Ứng dụng 1: Robot di chuyển</h2><p>Robot đi 3 m về phía Đông, sau đó đi 4 m về phía Bắc. Tính độ lớn độ dời.</p><button class="btn primary" data-reveal="r1">Hiện lời giải</button><div class="formula" id="r1" hidden>√(3² + 4²) = 5 m</div></article><article class="card"><h2>Ứng dụng 2: Tổng hợp lực</h2><p>Hai lực vuông góc có độ lớn 6 N và 8 N. Tính độ lớn hợp lực.</p><button class="btn primary" data-reveal="r2">Hiện lời giải</button><div class="formula" id="r2" hidden>√(6² + 8²) = 10 N</div></article><article class="card"><h2>Ứng dụng 3: Thiết bị bay</h2><p>Thiết bị bay di chuyển theo a⃗ = (4; 2), rồi b⃗ = (−1; 3). Tính vectơ độ dời tổng và độ dài.</p><button class="btn primary" data-reveal="r3">Hiện lời giải</button><div class="formula" id="r3" hidden>a⃗ + b⃗ = (3; 5), độ dài √34</div></article></section></main><footer>Demo học tập Vectơ · Toán 10 · Có thể dùng trên máy tính, điện thoại và máy chiếu</footer><script>
-const $=id=>document.getElementById(id);document.querySelectorAll('[data-tab]').forEach(b=>b.onclick=()=>{document.querySelectorAll('[data-tab]').forEach(x=>x.classList.toggle('active',x===b));document.querySelectorAll('.panel').forEach(x=>x.classList.toggle('active',x.id===b.dataset.tab))});const xy=p=>[180+p[0]*28,170-p[1]*28];function base(){let s='';for(let i=-5;i<=5;i++){let x=180+i*28,y=170+i*28;s+=`<path d="M${x} 16V324M26 ${y}H334" stroke="#dfe7ef" stroke-width="1"/>`;}return s+'<path d="M26 170H334M180 324V16" stroke="#687d93" stroke-width="1.7"/><text x="338" y="163" font-size="12">x</text><text x="187" y="18" font-size="12">y</text>';}
-function arrow(p,q,c){let [x,y]=xy(p),[X,Y]=xy(q),a=Math.atan2(Y-y,X-x);return `<path d="M${x} ${y}L${X} ${Y}" stroke="${c}" stroke-width="3.5"/><path d="M${X} ${Y}L${X-11*Math.cos(a-.48)} ${Y-11*Math.sin(a-.48)}L${X-11*Math.cos(a+.48)} ${Y-11*Math.sin(a+.48)}Z" fill="${c}"/>`;}
-let A=[-3,-1],B=[2,3],drag=null;function draw(){let s=base()+arrow(A,B,'#1576c5');[A,B].forEach((p,i)=>{let [x,y]=xy(p);s+=`<circle data-point="${i}" cx="${x}" cy="${y}" r="12" fill="${i?'#e89622':'#1576c5'}" stroke="white" stroke-width="2"/><text x="${x+13}" y="${y-12}" font-weight="bold">${i?'B':'A'}</text>`});$('graph').innerHTML=s;let dx=B[0]-A[0],dy=B[1]-A[1];$('coord').textContent=`A(${A.join('; ')}), B(${B.join('; ')}) | →AB = (${dx}; ${dy}) | Độ dài = ${Math.hypot(dx,dy).toFixed(2)}`;}
-let g=$('graph');g.addEventListener('pointerdown',e=>{let p=e.target.closest('[data-point]');if(p){drag=+p.dataset.point;g.setPointerCapture(e.pointerId)}});g.addEventListener('pointermove',e=>{if(drag===null)return;let r=g.getBoundingClientRect(),x=(e.clientX-r.left)*360/r.width,y=(e.clientY-r.top)*340/r.height,p=[Math.max(-5,Math.min(5,Math.round((x-180)/28))),Math.max(-5,Math.min(5,Math.round((170-y)/28)))];if(drag===0)A=p;else B=p;draw()});g.addEventListener('pointerup',()=>drag=null);g.addEventListener('pointercancel',()=>drag=null);$('reset').onclick=()=>{A=[-3,-1];B=[2,3];draw()};draw();
-let vals=[2,1,1,3],op='add';$('controls').innerHTML=['aₓ','aᵧ','bₓ','bᵧ'].map((t,i)=>`<label><b>${t}: <span id="val${i}">${vals[i]}</span></b><input type="range" min="-4" max="4" step="1" value="${vals[i]}" data-input="${i}"></label>`).join('');document.querySelectorAll('[data-input]').forEach(e=>e.oninput=()=>{vals[+e.dataset.input]=+e.value;$('val'+e.dataset.input).textContent=e.value;drawOp()});document.querySelectorAll('[data-op]').forEach(e=>e.onclick=()=>{op=e.dataset.op;document.querySelectorAll('[data-op]').forEach(x=>x.classList.toggle('primary',x===e));drawOp()});function drawOp(){let a=vals.slice(0,2),b=vals.slice(2),r=op==='sub'?[a[0]-b[0],a[1]-b[1]]:[a[0]+b[0],a[1]+b[1]],scale=Math.max(1,...a.map(Math.abs),...b.map(Math.abs),...(op==='dot'?[]:r.map(Math.abs)))/5;let shrink=p=>p.map(v=>v/scale);$('opgraph').innerHTML=base()+arrow([0,0],shrink(a),'#1576c5')+arrow([0,0],shrink(b),'#e89622')+(op==='dot'?'':arrow([0,0],shrink(r),'#169b79'));$('opresult').textContent=op==='dot'?`a⃗ · b⃗ = ${a[0]*b[0]+a[1]*b[1]}`:`${op==='add'?'a⃗ + b⃗':'a⃗ − b⃗'} = (${r[0]}; ${r[1]})`;}drawOp();
-const qs=[['Vectơ là gì?',['Một đoạn thẳng có hướng','Một đường thẳng','Một điểm','Một đoạn thẳng bất kỳ'],0,'Vectơ là đoạn thẳng có hướng.'],['A(1; 2), B(4; 6). Tọa độ AB là:',['(5; 8)','(3; 4)','(−3; −4)','(4; 3)'],1,'Lấy tọa độ B trừ tọa độ A.'],['Độ dài vectơ (3; 4) bằng:',['7','25','5','1'],2,'√(9+16)=5.'],['Hai vectơ bằng nhau khi:',['Cùng phương','Cùng độ dài','Cùng hướng và cùng độ dài','Chung điểm đầu'],2,'Cần cùng hướng và cùng độ dài.'],['(2; −1) + (3; 4) bằng:',['(5; 3)','(1; 5)','(6; −4)','(−1; −5)'],0,'Cộng từng tọa độ.'],['Tích vô hướng của (2; 3) và (4; −1) là:',['11','5','−5','8'],1,'2×4 + 3×(−1)=5.'],['Nếu hai vectơ khác không có tích vô hướng bằng 0 thì chúng:',['Cùng hướng','Vuông góc','Bằng nhau','Đối nhau'],1,'Hai vectơ vuông góc.'],['3(1; −2) bằng:',['(3; −6)','(4; 1)','(3; 6)','(1; −6)'],0,'Nhân từng tọa độ với 3.']];let qi=0,choice=null,score=0,done=false;function show(){choice=null;done=false;let q=qs[qi];$('progress').textContent=`Câu ${qi+1}/${qs.length}`;$('question').textContent=q[0];$('options').innerHTML='';q[1].forEach((s,i)=>{let b=document.createElement('button');b.textContent='ABCD'[i]+'. '+s;b.onclick=()=>{if(done)return;choice=i;document.querySelectorAll('#options button').forEach((x,j)=>x.classList.toggle('selected',j===i))};$('options').appendChild(b)});$('feedback').textContent='';$('check').hidden=false;$('next').hidden=true;$('again').hidden=true;}$('check').onclick=()=>{if(choice===null){$('feedback').textContent='Vui lòng chọn một đáp án.';return;}done=true;let q=qs[qi],ok=choice===q[2];if(ok)score++;$('feedback').style.color=ok?'#118360':'#b45b21';$('feedback').textContent=(ok?'✓ Chính xác! ':'✗ Chưa chính xác. ')+q[3];$('check').hidden=true;if(qi===qs.length-1){$('feedback').textContent+=` Kết quả: ${score}/${qs.length} câu đúng.`;$('again').hidden=false}else $('next').hidden=false;};$('next').onclick=()=>{qi++;show()};$('again').onclick=()=>{qi=0;score=0;show()};show();document.querySelectorAll('[data-reveal]').forEach(b=>b.onclick=()=>{let x=$(b.dataset.reveal);x.hidden=!x.hidden;b.textContent=x.hidden?'Hiện lời giải':'Ẩn lời giải'});
-</script></body></html>
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Khám phá Vectơ | Toán 10</title>
+  <style>
+    :root {
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+      color: #18304b;
+      background: #f2f6fc;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; }
+    header {
+      background: linear-gradient(120deg, #103b78, #087f9b);
+      color: white;
+      padding: 32px max(20px, calc((100% - 1100px)/2));
+    }
+    header h1 { font-size: clamp(28px, 4.5vw, 44px); margin: 8px 0; }
+    header p { opacity: .92; margin: 0; }
+    .wrap { max-width: 1100px; margin: auto; padding: 20px; }
+    .tabs { display: flex; flex-wrap: wrap; gap: 8px; margin: 10px 0 22px; }
+    .tabs button, .btn {
+      border: 0;
+      background: white;
+      border-radius: 10px;
+      padding: 11px 16px;
+      font-weight: 700;
+      color: #20517c;
+      cursor: pointer;
+      transition: all .15s ease;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+    }
+    .tabs button:hover, .btn:hover { background: #e7f1fc; }
+    .tabs button.active, .btn.primary { background: #176bc1; color: white; }
+    .btn.primary:hover { background: #12559c; }
+    .btn.success { background: #169b79; color: white; }
+    .btn.success:hover { background: #117b60; }
+    .card {
+      background: white;
+      padding: 24px;
+      border-radius: 16px;
+      box-shadow: 0 5px 25px #17457413;
+      margin-bottom: 18px;
+    }
+    .card h2 { margin-top: 0; color: #103b78; }
+    .card h3 { color: #176bc1; margin-top: 18px; margin-bottom: 8px; }
+    .panel { display: none; }
+    .panel.active { display: block; }
+    .formula {
+      background: #edf5ff;
+      border-radius: 10px;
+      padding: 15px;
+      margin: 14px 0;
+      text-align: center;
+      font-size: 20px;
+      color: #104b91;
+    }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
+    .graph {
+      max-width: 600px;
+      width: 100%;
+      border: 1px solid #e4eaf1;
+      border-radius: 12px;
+      touch-action: none;
+      background: white;
+    }
+    input[type=range] { width: 100%; }
+    .options button {
+      display: block;
+      text-align: left;
+      width: 100%;
+      background: #f1f6fd;
+      border: 2px solid transparent;
+      border-radius: 10px;
+      padding: 12px;
+      margin: 9px 0;
+      cursor: pointer;
+    }
+    .options button.selected { border-color: #1974c9; background: #e5effd; }
+    .muted { color: #63758c; }
+    .tag {
+      background: #e3f2ff;
+      color: #1b568c;
+      padding: 6px 10px;
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: 600;
+    }
+    .feedback { font-weight: 700; margin: 12px 0; }
+    footer { text-align: center; padding: 24px; color: #65758a; font-size: 14px; }
+    
+    /* Giao diện biểu mẫu Công văn 5512 */
+    .form-group { margin-bottom: 14px; }
+    .form-group label { display: block; font-weight: 600; margin-bottom: 5px; color: #1e3d60; }
+    .form-control {
+      width: 100%;
+      padding: 10px 12px;
+      border: 1px solid #ccd8e6;
+      border-radius: 8px;
+      font-size: 15px;
+      font-family: inherit;
+    }
+    .form-control:focus { outline: none; border-color: #176bc1; box-shadow: 0 0 0 3px rgba(23,107,193,0.15); }
+    .lesson-preview {
+      background: #fff;
+      border: 1px solid #dbe4ef;
+      border-radius: 12px;
+      padding: 30px;
+      margin-top: 20px;
+      line-height: 1.6;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+    }
+    .lesson-preview h1, .lesson-preview h2, .lesson-preview h3, .lesson-preview h4 {
+      color: #0f3057;
+    }
+    .lesson-preview table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 15px 0;
+    }
+    .lesson-preview th, .lesson-preview td {
+      border: 1px solid #c9d8ea;
+      padding: 10px;
+      vertical-align: top;
+    }
+    .lesson-preview th {
+      background: #f0f6ff;
+      color: #113f79;
+      text-align: left;
+    }
+    .action-bar { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 15px; }
+
+    @media print {
+      body * { visibility: hidden; }
+      #lessonOutput, #lessonOutput * { visibility: visible; }
+      #lessonOutput {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        margin: 0;
+        padding: 20px;
+        box-shadow: none;
+        border: none;
+      }
+    }
+
+    @media(max-width: 600px) {
+      .card { padding: 16px; }
+      .wrap { padding: 12px; }
+      .lesson-preview { padding: 16px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="tag" style="display:inline-block">WEBSITE HỌC TẬP TƯƠNG TÁC</div>
+    <h1>KHÁM PHÁ VECTƠ</h1>
+    <p>Toán 10 · Học bằng trực quan · Thực hành · Soạn bài chuẩn CV 5512</p>
+  </header>
+
+  <main class="wrap">
+    <nav class="tabs" aria-label="Chuyên mục">
+      <button class="active" data-tab="theory">📖 Kiến thức</button>
+      <button data-tab="explore">📐 Khám phá</button>
+      <button data-tab="operations">➕ Phép toán</button>
+      <button data-tab="quiz">✍️ Trắc nghiệm</button>
+      <button data-tab="real">🚀 Thực tiễn</button>
+      <button data-tab="lesson-plan">📑 Soạn giáo án 5512</button>
+    </nav>
+
+    <!-- Tab 1: Kiến thức -->
+    <section class="panel active" id="theory">
+      <article class="card">
+        <h2>1. Vectơ là gì?</h2>
+        <p>Vectơ là một đoạn thẳng có hướng. Vectơ AB có điểm đầu A, điểm cuối B và độ dài bằng độ dài đoạn thẳng AB.</p>
+        <div class="formula">→AB &nbsp; |→AB| = AB</div>
+        <p><b>Hai vectơ cùng phương:</b> Giá của chúng song song hoặc trùng nhau.</p>
+        <p><b>Hai vectơ bằng nhau:</b> Cùng hướng và cùng độ dài.</p>
+        <p><b>Vectơ đối:</b> Cùng độ dài và ngược hướng.</p>
+        <p><b>Vectơ không:</b> Có điểm đầu trùng điểm cuối.</p>
+      </article>
+      <article class="card">
+        <h2>2. Công thức trọng tâm</h2>
+        <div class="grid">
+          <div class="formula">→AB + →BC = →AC</div>
+          <div class="formula">a⃗ − b⃗ = a⃗ + (−b⃗)</div>
+          <div class="formula">a⃗·b⃗ = |a⃗||b⃗|cos α</div>
+          <div class="formula">|(x; y)| = √(x² + y²)</div>
+        </div>
+        <p class="muted">Trong công thức tích vô hướng, α là góc giữa hai vectơ khác vectơ không.</p>
+      </article>
+    </section>
+
+    <!-- Tab 2: Khám phá -->
+    <section class="panel" id="explore">
+      <article class="card">
+        <h2>Phòng thí nghiệm vectơ</h2>
+        <p>Kéo hai điểm A, B trên mặt phẳng tọa độ để khám phá tọa độ và độ dài vectơ AB.</p>
+        <svg class="graph" id="graph" viewBox="0 0 360 340" aria-label="Đồ thị vectơ kéo thả"></svg>
+        <div class="formula" id="coord"></div>
+        <button class="btn primary" id="reset">Đặt lại</button>
+        <p class="muted">Quy tắc: tọa độ vectơ AB bằng tọa độ B trừ tọa độ A.</p>
+      </article>
+    </section>
+
+    <!-- Tab 3: Phép toán -->
+    <section class="panel" id="operations">
+      <article class="card">
+        <h2>Thử nghiệm các phép toán</h2>
+        <p>Điều chỉnh tọa độ hai vectơ và quan sát kết quả.</p>
+        <div class="grid" id="controls"></div>
+        <p>
+          <button class="btn primary" data-op="add">a⃗ + b⃗</button> 
+          <button class="btn" data-op="sub">a⃗ − b⃗</button> 
+          <button class="btn" data-op="dot">a⃗ · b⃗</button>
+        </p>
+        <svg class="graph" id="opgraph" viewBox="0 0 360 340"></svg>
+        <div class="formula" id="opresult"></div>
+        <p class="muted">Màu xanh dương: a⃗ · Màu cam: b⃗ · Màu xanh lá: vectơ kết quả. Các vectơ vượt ngoài khung sẽ được thu nhỏ đồng đều để hiển thị.</p>
+      </article>
+    </section>
+
+    <!-- Tab 4: Trắc nghiệm -->
+    <section class="panel" id="quiz">
+      <article class="card">
+        <h2>Kiểm tra kiến thức</h2>
+        <span class="tag" id="progress"></span>
+        <h3 id="question"></h3>
+        <div class="options" id="options"></div>
+        <div class="feedback" id="feedback" aria-live="polite"></div>
+        <button class="btn primary" id="check">Kiểm tra</button> 
+        <button class="btn" id="next" hidden>Câu tiếp theo →</button> 
+        <button class="btn" id="again" hidden>Làm lại</button>
+      </article>
+    </section>
+
+    <!-- Tab 5: Thực tiễn -->
+    <section class="panel" id="real">
+      <article class="card">
+        <h2>Ứng dụng 1: Robot di chuyển</h2>
+        <p>Robot đi 3 m về phía Đông, sau đó đi 4 m về phía Bắc. Tính độ lớn độ dời.</p>
+        <button class="btn primary" data-reveal="r1">Hiện lời giải</button>
+        <div class="formula" id="r1" hidden>√(3² + 4²) = 5 m</div>
+      </article>
+      <article class="card">
+        <h2>Ứng dụng 2: Tổng hợp lực</h2>
+        <p>Hai lực vuông góc có độ lớn 6 N và 8 N. Tính độ lớn hợp lực.</p>
+        <button class="btn primary" data-reveal="r2">Hiện lời giải</button>
+        <div class="formula" id="r2" hidden>√(6² + 8²) = 10 N</div>
+      </article>
+      <article class="card">
+        <h2>Ứng dụng 3: Thiết bị bay</h2>
+        <p>Thiết bị bay di chuyển theo a⃗ = (4; 2), rồi b⃗ = (−1; 3). Tính vectơ độ dời tổng và độ dài.</p>
+        <button class="btn primary" data-reveal="r3">Hiện lời giải</button>
+        <div class="formula" id="r3" hidden>a⃗ + b⃗ = (3; 5), độ dài √34</div>
+      </article>
+    </section>
+
+    <!-- Tab 6: Soạn giáo án theo CV 5512 -->
+    <section class="panel" id="lesson-plan">
+      <article class="card">
+        <h2>Soạn Kế hoạch bài dạy (Giáo án) theo Công văn 5512/BGDĐT-GDTrH</h2>
+        <p class="muted">Hỗ trợ giáo viên tạo nhanh giáo án môn Toán 10 chuẩn 4 bước tiến trình dạy học theo khung Phụ lục IV (CV 5512): Khởi động - Hình thành kiến thức - Luyện tập - Vận dụng.</p>
+
+        <div class="grid">
+          <div class="form-group">
+            <label for="lpTopic">Chọn chủ đề bài học:</label>
+            <select id="lpTopic" class="form-control">
+              <option value="khai_niem">Bài 1: Khái niệm vectơ</option>
+              <option value="tong_hieu">Bài 2: Tổng và hiệu của hai vectơ</option>
+              <option value="tich_so">Bài 3: Tích của một số với một vectơ</option>
+              <option value="tich_vo_huong">Bài 4: Tích vô hướng của hai vectơ</option>
+              <option value="toa_do">Bài 5: Tọa độ của vectơ trong mặt phẳng</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="lpGrade">Lớp / Bộ sách:</label>
+            <input type="text" id="lpGrade" class="form-control" value="Toán 10 (Kết nối tri thức / Cánh Diều / Chân trời sáng tạo)">
+          </div>
+          <div class="form-group">
+            <label for="lpDuration">Thời lượng dự kiến:</label>
+            <input type="text" id="lpDuration" class="form-control" value="2 tiết (90 phút)">
+          </div>
+          <div class="form-group">
+            <label for="lpTeacher">Họ và tên giáo viên:</label>
+            <input type="text" id="lpTeacher" class="form-control" placeholder="Thầy/Cô: ...">
+          </div>
+        </div>
+
+        <div class="action-bar">
+          <button class="btn primary" id="btnGenPlan">⚡ Tạo giáo án chuẩn 5512</button>
+          <button class="btn success" id="btnPrintPlan">🖨️ In / Xuất PDF</button>
+          <button class="btn" id="btnCopyPlan">📋 Sao chép nội dung</button>
+        </div>
+
+        <!-- Vùng hiển thị giáo án -->
+        <div id="lessonOutput" class="lesson-preview">
+          <!-- Sẽ được điền tự động bằng Javascript -->
+        </div>
+      </article>
+    </section>
+  </main>
+
+  <footer>Demo học tập Vectơ · Toán 10 · Có thể dùng trên máy tính, điện thoại và máy chiếu</footer>
+
+  <script>
+    const $ = id => document.getElementById(id);
+
+    // Xử lý chuyển tab
+    document.querySelectorAll('[data-tab]').forEach(b => b.onclick = () => {
+      document.querySelectorAll('[data-tab]').forEach(x => x.classList.toggle('active', x === b));
+      document.querySelectorAll('.panel').forEach(x => x.classList.toggle('active', x.id === b.dataset.tab));
+    });
+
+    // Hệ tọa độ & SVG
+    const xy = p => [180 + p[0] * 28, 170 - p[1] * 28];
+    function base() {
+      let s = '';
+      for (let i = -5; i <= 5; i++) {
+        let x = 180 + i * 28, y = 170 + i * 28;
+        s += `<path d="M${x} 16V324M26 ${y}H334" stroke="#dfe7ef" stroke-width="1"/>`;
+      }
+      return s + '<path d="M26 170H334M180 324V16" stroke="#687d93" stroke-width="1.7"/><text x="338" y="163" font-size="12">x</text><text x="187" y="18" font-size="12">y</text>';
+    }
+
+    function arrow(p, q, c) {
+      let [x, y] = xy(p), [X, Y] = xy(q), a = Math.atan2(Y - y, X - x);
+      return `<path d="M${x} ${y}L${X} ${Y}" stroke="${c}" stroke-width="3.5"/><path d="M${X} ${Y}L${X - 11 * Math.cos(a - .48)} ${Y - 11 * Math.sin(a - .48)}L${X - 11 * Math.cos(a + .48)} ${Y - 11 * Math.sin(a + .48)}Z" fill="${c}"/>`;
+    }
+
+    // Kéo thả Tab Khám phá
+    let A = [-3, -1], B = [2, 3], drag = null;
+    function draw() {
+      let s = base() + arrow(A, B, '#1576c5');
+      [A, B].forEach((p, i) => {
+        let [x, y] = xy(p);
+        s += `<circle data-point="${i}" cx="${x}" cy="${y}" r="12" fill="${i ? '#e89622' : '#1576c5'}" stroke="white" stroke-width="2"/><text x="${x + 13}" y="${y - 12}" font-weight="bold">${i ? 'B' : 'A'}</text>`;
+      });
+      $('graph').innerHTML = s;
+      let dx = B[0] - A[0], dy = B[1] - A[1];
+      $('coord').textContent = `A(${A.join('; ')}), B(${B.join('; ')}) | →AB = (${dx}; ${dy}) | Độ dài = ${Math.hypot(dx, dy).toFixed(2)}`;
+    }
+
+    let g = $('graph');
+    g.addEventListener('pointerdown', e => {
+      let p = e.target.closest('[data-point]');
+      if (p) { drag = +p.dataset.point; g.setPointerCapture(e.pointerId); }
+    });
+    g.addEventListener('pointermove', e => {
+      if (drag === null) return;
+      let r = g.getBoundingClientRect(),
+          x = (e.clientX - r.left) * 360 / r.width,
+          y = (e.clientY - r.top) * 340 / r.height,
+          p = [Math.max(-5, Math.min(5, Math.round((x - 180) / 28))), Math.max(-5, Math.min(5, Math.round((170 - y) / 28)))];
+      if (drag === 0) A = p; else B = p;
+      draw();
+    });
+    g.addEventListener('pointerup', () => drag = null);
+    g.addEventListener('pointercancel', () => drag = null);
+    $('reset').onclick = () => { A = [-3, -1]; B = [2, 3]; draw(); };
+    draw();
+
+    // Tab Phép toán
+    let vals = [2, 1, 1, 3], op = 'add';
+    $('controls').innerHTML = ['aₓ', 'aᵧ', 'bₓ', 'bᵧ'].map((t, i) => `<label><b>${t}: <span id="val${i}">${vals[i]}</span></b><input type="range" min="-4" max="4" step="1" value="${vals[i]}" data-input="${i}"></label>`).join('');
+    document.querySelectorAll('[data-input]').forEach(e => e.oninput = () => {
+      vals[+e.dataset.input] = +e.value;
+      $('val' + e.dataset.input).textContent = e.value;
+      drawOp();
+    });
+    document.querySelectorAll('[data-op]').forEach(e => e.onclick = () => {
+      op = e.dataset.op;
+      document.querySelectorAll('[data-op]').forEach(x => x.classList.toggle('primary', x === e));
+      drawOp();
+    });
+    function drawOp() {
+      let a = vals.slice(0, 2), b = vals.slice(2),
+          r = op === 'sub' ? [a[0] - b[0], a[1] - b[1]] : [a[0] + b[0], a[1] + b[1]],
+          scale = Math.max(1, ...a.map(Math.abs), ...b.map(Math.abs), ...(op === 'dot' ? [] : r.map(Math.abs))) / 5;
+      let shrink = p => p.map(v => v / scale);
+      $('opgraph').innerHTML = base() + arrow([0, 0], shrink(a), '#1576c5') + arrow([0, 0], shrink(b), '#e89622') + (op === 'dot' ? '' : arrow([0, 0], shrink(r), '#169b79'));
+      $('opresult').textContent = op === 'dot' ? `a⃗ · b⃗ = ${a[0] * b[0] + a[1] * b[1]}` : `${op === 'add' ? 'a⃗ + b⃗' : 'a⃗ − b⃗'} = (${r[0]}; ${r[1]})`;
+    }
+    drawOp();
+
+    // Tab Trắc nghiệm
+    const qs = [
+      ['Vectơ là gì?', ['Một đoạn thẳng có hướng', 'Một đường thẳng', 'Một điểm', 'Một đoạn thẳng bất kỳ'], 0, 'Vectơ là đoạn thẳng có hướng.'],
+      ['A(1; 2), B(4; 6). Tọa độ AB là:', ['(5; 8)', '(3; 4)', '(−3; −4)', '(4; 3)'], 1, 'Lấy tọa độ B trừ tọa độ A.'],
+      ['Độ dài vectơ (3; 4) bằng:', ['7', '25', '5', '1'], 2, '√(9+16)=5.'],
+      ['Hai vectơ bằng nhau khi:', ['Cùng phương', 'Cùng độ dài', 'Cùng hướng và cùng độ dài', 'Chung điểm đầu'], 2, 'Cần cùng hướng và cùng độ dài.'],
+      ['(2; −1) + (3; 4) bằng:', ['(5; 3)', '(1; 5)', '(6; −4)', '(−1; −5)'], 0, 'Cộng từng tọa độ.'],
+      ['Tích vô hướng của (2; 3) và (4; −1) là:', ['11', '5', '−5', '8'], 1, '2×4 + 3×(−1)=5.'],
+      ['Nếu hai vectơ khác không có tích vô hướng bằng 0 thì chúng:', ['Cùng hướng', 'Vuông góc', 'Bằng nhau', 'Đối nhau'], 1, 'Hai vectơ vuông góc.'],
+      ['3(1; −2) bằng:', ['(3; −6)', '(4; 1)', '(3; 6)', '(1; −6)'], 0, 'Nhân từng tọa độ với 3.']
+    ];
+    let qi = 0, choice = null, score = 0, done = false;
+    function show() {
+      choice = null; done = false; let q = qs[qi];
+      $('progress').textContent = `Câu ${qi + 1}/${qs.length}`;
+      $('question').textContent = q[0];
+      $('options').innerHTML = '';
+      q[1].forEach((s, i) => {
+        let b = document.createElement('button');
+        b.textContent = 'ABCD'[i] + '. ' + s;
+        b.onclick = () => {
+          if (done) return;
+          choice = i;
+          document.querySelectorAll('#options button').forEach((x, j) => x.classList.toggle('selected', j === i));
+        };
+        $('options').appendChild(b);
+      });
+      $('feedback').textContent = '';
+      $('check').hidden = false; $('next').hidden = true; $('again').hidden = true;
+    }
+    $('check').onclick = () => {
+      if (choice === null) { $('feedback').textContent = 'Vui lòng chọn một đáp án.'; return; }
+      done = true; let q = qs[qi], ok = choice === q[2];
+      if (ok) score++;
+      $('feedback').style.color = ok ? '#118360' : '#b45b21';
+      $('feedback').textContent = (ok ? '✓ Chính xác! ' : '✗ Chưa chính xác. ') + q[3];
+      $('check').hidden = true;
+      if (qi === qs.length - 1) {
+        $('feedback').textContent += ` Kết quả: ${score}/${qs.length} câu đúng.`;
+        $('again').hidden = false;
+      } else $('next').hidden = false;
+    };
+    $('next').onclick = () => { qi++; show(); };
+    $('again').onclick = () => { qi = 0; score = 0; show(); };
+    show();
+
+    // Tab Thực tiễn
+    document.querySelectorAll('[data-reveal]').forEach(b => b.onclick = () => {
+      let x = $(b.dataset.reveal);
+      x.hidden = !x.hidden;
+      b.textContent = x.hidden ? 'Hiện lời giải' : 'Ẩn lời giải';
+    });
+
+    // ==========================================
+    // MODULE SOẠN GIÁO ÁN THEO CÔNG VĂN 5512
+    // ==========================================
+    const lessonData = {
+      khai_niem: {
+        title: "BÀI 1: KHÁI NIỆM VECTƠ",
+        muctieu_kt: "Học sinh hiểu được định nghĩa vectơ, vectơ-không, độ dài vectơ, hai vectơ cùng phương, cùng hướng, hai vectơ bằng nhau.",
+        muctieu_nl: "Năng lực tư duy và lập luận toán học: nhận biết quan hệ cùng hướng, ngược hướng; Năng lực mô hình hóa toán học: mô tả các đại lượng có hướng trong vật lí (lực, vận tốc, độ dời).",
+        muctieu_pc: "Chăm chỉ, tích cực tham gia các hoạt động tìm tòi khám phá, cẩn thận và chính xác trong biểu diễn hình học.",
+        hd1: "Quan sát chuyển động của máy bay và tàu thuyền trên bản đồ rada. Đặt vấn đề: Một đại lượng vừa có độ lớn vừa có hướng được mô tả trong toán học như thế nào?",
+        hd2: "1. Định nghĩa vectơ và kí hiệu.<br>2. Hai vectơ cùng phương, cùng hướng, ngược hướng.<br>3. Hai vectơ bằng nhau và vectơ-không.",
+        hd3: "Làm bài tập nhận biết các cặp vectơ cùng hướng, bằng nhau trên hình bình hành, hình vuông và lục giác đều.",
+        hd4: "Ứng dụng trong việc xác định hướng chuyển động của robot định vị và hướng gió trong thực tế."
+      },
+      tong_hieu: {
+        title: "BÀI 2: TỔNG VÀ HIỆU CỦA HAI VECTƠ",
+        muctieu_kt: "Nắm vững quy tắc ba điểm, quy tắc hình bình hành; tính chất của phép cộng vectơ; định nghĩa vectơ đối và phép trừ vectơ.",
+        muctieu_nl: "Năng lực giải quyết vấn đề toán học thông qua việc tổng hợp hai lực đồng quy, cộng các độ dời liên tiếp.",
+        muctieu_pc: "Trách nhiệm và tinh thần hợp tác nhóm khi thảo luận thực hiện các quy tắc hình học.",
+        hd1: "Bài toán di chuyển: Một chất điểm chuyển động từ A đến B, sau đó từ B đến C. Vị trí cuối cùng so với ban đầu được mô tả qua quy tắc nào?",
+        hd2: "1. Tổng hai vectơ và Quy tắc 3 điểm: AB + BC = AC.<br>2. Quy tắc hình bình hành.<br>3. Tính chất phép cộng và vectơ đối, quy tắc hiệu.",
+        hd3: "Áp dụng rút gọn các biểu thức vectơ dạng: AB + CD + BC; tính độ dài vectơ tổng hai lực vuông góc.",
+        hd4: "Xác định hướng và vận tốc thực tế của chiếc thuyền khi chèo qua sông có dòng nước chảy xiết."
+      },
+      tich_so: {
+        title: "BÀI 3: TÍCH CỦA MỘT SỐ VỚI MỘT VECTƠ",
+        muctieu_kt: "Định nghĩa tích của một số thực k với vectơ; tính chất của phép nhân; điều kiện để hai vectơ cùng phương; biểu thị một vectơ qua hai vectơ không cùng phương.",
+        muctieu_nl: "Năng lực tư duy đại số kết hợp hình học; mô tả trọng tâm tam giác, trung điểm đoạn thẳng bằng ngôn ngữ vectơ.",
+        muctieu_pc: "Tự giác tìm tòi cách biến đổi hệ thức vectơ tối ưu nhất.",
+        hd1: "Xét hai vectơ cùng hướng và một vectơ gấp đôi độ dài vectơ kia. Làm thế nào để biểu thị mối liên hệ bằng một biểu thức số học?",
+        hd2: "1. Định nghĩa tích k.a⃗ và quy ước hướng.<br>2. Các tính chất đại số.<br>3. Trung điểm và Trọng tâm: IA + IB = 0; GA + GB + GC = 0.",
+        hd3: "Chứng minh ba điểm thẳng hàng, phân tích vectơ AM theo hai vectơ cạnh AB và AC.",
+        hd4: "Ứng dụng tìm trọng tâm của vật thể phẳng trong thiết kế xây dựng và cơ học kỹ thuật."
+      },
+      tich_vo_huong: {
+        title: "BÀI 4: TÍCH VÔ HƯỚNG CỦA HAI VECTƠ",
+        muctieu_kt: "Hiểu góc giữa hai vectơ, công thức định nghĩa tích vô hướng a⃗·b⃗ = |a⃗||b⃗|cos α; điều kiện hai vectơ vuông góc; các tính chất đại số.",
+        muctieu_nl: "Năng lực mô hình hóa công cơ học trong Vật lí (A = F.s.cos α); tính góc và chứng minh quan hệ vuông góc trong hình phẳng.",
+        muctieu_pc: "Kiên trì và cẩn thận trong việc xác định đúng góc giữa hai vectơ khi chúng không chung gốc.",
+        hd1: "Bài toán kéo xe: Một người kéo xe hàng đi trên mặt đường nằm ngang với lực F hợp với phương chuyển động một góc α. Công sinh ra tính như thế nào?",
+        hd2: "1. Khái niệm góc giữa hai vectơ.<br>2. Định nghĩa tích vô hướng và các trường hợp đặc biệt (bình phương vô hướng, vuông góc).<br>3. Tính chất phân phối và hằng đẳng thức vectơ.",
+        hd3: "Tính tích vô hướng trong tam giác đều cạnh a, tính góc giữa hai đường chéo hình thang vuông.",
+        hd4: "Tối ưu hóa góc kéo dây cáp để công sinh ra lớn nhất trong ngành vận tải và cần cẩu hàng hóa."
+      },
+      toa_do: {
+        title: "BÀI 5: TỌA ĐỘ CỦA VECTƠ TRONG MẶT PHẲNG",
+        muctieu_kt: "Nắm vững hệ trục tọa độ Oxy, tọa độ của vectơ, tọa độ điểm; biểu thức tọa độ của các phép toán cộng, trừ, nhân với một số, tích vô hướng và độ dài vectơ.",
+        muctieu_nl: "Năng lực chuyển đổi linh hoạt giữa ngôn ngữ hình học thuần túy và ngôn ngữ đại số giải tích.",
+        muctieu_pc: "Rèn luyện tính chính xác, tính toán cẩn thận không nhầm lẫn dấu tọa độ.",
+        hd1: "Làm thế nào để máy tính và màn hình GPS định vị chính xác vị trí và hướng bay của máy bay trên bản đồ số?",
+        hd2: "1. Trục tọa độ và hệ trục Oxy.<br>2. Biểu diễn vectơ qua hai vectơ đơn vị i và j.<br>3. Công thức tọa độ phép toán và độ dài: u = (x; y) => |u| = √(x² + y²).",
+        hd3: "Tìm tọa độ điểm D để ABCD là hình bình hành; tính khoảng cách giữa hai điểm A(xA, yA) và B(xB, yB).",
+        hd4: "Mô phỏng đường đi của nhân vật trong game 2D bằng hệ tọa độ vectơ trên màn hình máy tính."
+      }
+    };
+
+    function renderLessonPlan() {
+      const topicKey = $('lpTopic').value;
+      const data = lessonData[topicKey];
+      const grade = $('lpGrade').value || 'Toán 10';
+      const duration = $('lpDuration').value || '2 tiết';
+      const teacher = $('lpTeacher').value ? `Giáo viên: <b>${$('lpTeacher').value}</b>` : '';
+
+      const html = `
+        <div style="text-align: center; margin-bottom: 25px; border-bottom: 2px solid #103b78; padding-bottom: 15px;">
+          <h2 style="margin: 0; color: #103b78; text-transform: uppercase;">KẾ HOẠCH BÀI DẠY (GIÁO ÁN)</h2>
+          <div style="font-size: 15px; color: #496382; margin-top: 5px;">(Xây dựng theo khung Phụ lục IV - Công văn số 5512/BGDĐT-GDTrH)</div>
+          <h1 style="margin: 12px 0 6px 0; color: #087f9b; font-size: 24px;">${data.title}</h1>
+          <div>Môn học: <b>Toán 10</b> | ${grade} | Thời lượng: <b>${duration}</b></div>
+          ${teacher ? `<div style="margin-top: 5px;">${teacher}</div>` : ''}
+        </div>
+
+        <h3>I. MỤC TIÊU BÀI HỌC</h3>
+        <p><b>1. Về kiến thức:</b> ${data.muctieu_kt}</p>
+        <p><b>2. Về năng lực:</b></p>
+        <ul>
+          <li><b>Năng lực chung:</b> Tự chủ và tự học (tự đọc SGK và tài liệu tương tác), giao tiếp và hợp tác (thảo luận nhóm hoàn thành nhiệm vụ).</li>
+          <li><b>Năng lực đặc thù:</b> ${data.muctieu_nl}</li>
+        </ul>
+        <p><b>3. Về phẩm chất:</b> ${data.muctieu_pc}</p>
+
+        <h3>II. THIẾT BỊ DẠY HỌC VÀ HỌC LIỆU</h3>
+        <ul>
+          <li><b>Giáo viên:</b> Kế hoạch bài dạy, bài giảng điện tử, máy chiếu/TV tương tác, thước kẻ, compa, phiếu học tập, ứng dụng web trực quan <i>https://toan10dodo.vercel.app</i>.</li>
+          <li><b>Học sinh:</b> Sách giáo khoa Toán 10, vở ghi chép, thước kẻ, êke, máy tính cầm tay; điện thoại/máy tính bảng (nếu được GV cho phép để truy cập phần mềm mô phỏng theo CV 5512).</li>
+        </ul>
+
+        <h3>III. TIẾN TRÌNH DẠY HỌC</h3>
+        <p class="muted"><i>(Bao gồm 4 hoạt động cơ bản theo đúng cấu trúc chuẩn của Bộ Giáo dục & Đào tạo)</i></p>
+
+        <table>
+          <thead>
+            <tr>
+              <th style="width: 28%;">Hoạt động</th>
+              <th>Mục tiêu, Nội dung và Tổ chức thực hiện</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <b>1. HOẠT ĐỘNG 1: KHỞI ĐỘNG</b><br>
+                <small class="muted">(Xác định vấn đề / nhiệm vụ học tập)</small>
+              </td>
+              <td>
+                <p><b>a) Mục tiêu:</b> Gợi mở hứng thú, kích thích tư duy toán học và giúp học sinh thấy được nhu cầu hình thành khái niệm mới.</p>
+                <p><b>b) Nội dung:</b> ${data.hd1}</p>
+                <p><b>c) Sản phẩm:</b> Câu trả lời dự đoán hoặc mô tả ban đầu của học sinh về vấn đề.</p>
+                <p><b>d) Tổ chức thực hiện:</b>
+                  <br>• <i>Chuyển giao:</i> GV trình chiếu tình huống thực tế bằng hình ảnh/video hoặc mô hình web trực quan.
+                  <br>• <i>Thực hiện:</i> HS thảo luận cặp đôi suy nghĩ câu trả lời.
+                  <br>• <i>Báo cáo:</i> Đại diện 1-2 HS phát biểu, các HS khác bổ sung.
+                  <br>• <i>Kết luận:</i> GV nhận xét, đặt vấn đề dẫn dắt vào bài học mới.
+                </p>
+              </td>
+            </tr>
+
+            <tr>
+              <td>
+                <b>2. HOẠT ĐỘNG 2: HÌNH THÀNH KIẾN THỨC MỚI</b>
+              </td>
+              <td>
+                <p><b>a) Mục tiêu:</b> Học sinh nắm vững các định nghĩa, quy tắc và tính chất cốt lõi của bài học.</p>
+                <p><b>b) Nội dung:</b><br>${data.hd2}</p>
+                <p><b>c) Sản phẩm:</b> Vở ghi đầy đủ các định nghĩa, công thức; lời giải các bài tập ví dụ mẫu trong SGK.</p>
+                <p><b>d) Tổ chức thực hiện:</b>
+                  <br>• <i>Chuyển giao:</i> GV giao phiếu học tập cho các nhóm, hướng dẫn HS thao tác trên phòng thí nghiệm trực quan.
+                  <br>• <i>Thực hiện:</i> HS làm việc nhóm, thực hiện kéo thả và đối chiếu kết quả đo đạc.
+                  <br>• <i>Báo cáo:</i> Nhóm trưởng dán bảng nhóm hoặc trình bày kết quả trước lớp.
+                  <br>• <i>Kết luận:</i> GV chính xác hóa kiến thức, rút ra các quy tắc và định lý cần ghi nhớ.
+                </p>
+              </td>
+            </tr>
+
+            <tr>
+              <td>
+                <b>3. HOẠT ĐỘNG 3: LUYỆN TẬP</b>
+              </td>
+              <td>
+                <p><b>a) Mục tiêu:</b> Củng cố kiến thức vừa học, rèn luyện kỹ năng vẽ hình, tính toán và vận dụng công thức chuẩn xác.</p>
+                <p><b>b) Nội dung:</b> ${data.hd3}</p>
+                <p><b>c) Sản phẩm:</b> Bài làm của học sinh trên bảng và trong vở bài tập; kết quả bài trắc nghiệm nhanh trên hệ thống.</p>
+                <p><b>d) Tổ chức thực hiện:</b>
+                  <br>• <i>Chuyển giao:</i> GV chia bài tập thành các mức độ: nhận biết - thông hiểu - vận dụng thấp.
+                  <br>• <i>Thực hiện:</i> HS giải độc lập, sau đó đổi chéo vở kiểm tra chéo đáp án.
+                  <br>• <i>Báo cáo:</i> Gọi học sinh lên bảng giải, phân tích các lỗi sai phổ biến.
+                  <br>• <i>Kết luận:</i> GV đánh giá, chấm điểm động viên và lưu ý các bẫy đề thi.
+                </p>
+              </td>
+            </tr>
+
+            <tr>
+              <td>
+                <b>4. HOẠT ĐỘNG 4: VẬN DỤNG</b>
+              </td>
+              <td>
+                <p><b>a) Mục tiêu:</b> Phát triển năng lực vận dụng kiến thức vectơ để giải quyết bài toán liên môn (Vật lí, Kỹ thuật) và đời sống.</p>
+                <p><b>b) Nội dung:</b> ${data.hd4}</p>
+                <p><b>c) Sản phẩm:</b> Bài thuyết trình báo cáo nhỏ hoặc bài nộp hoàn chỉnh của học sinh về dự án liên hệ thực tế.</p>
+                <p><b>d) Tổ chức thực hiện:</b>
+                  <br>• <i>Chuyển giao:</i> GV giao bài toán thực tiễn làm theo nhóm ở nhà hoặc phần mềm mô phỏng.
+                  <br>• <i>Thực hiện:</i> Nhóm HS phân công nhiệm vụ, thu thập số liệu và tính toán.
+                  <br>• <i>Đánh giá:</i> GV hướng dẫn nộp bài qua nhóm học tập và tuyên dương các giải pháp sáng tạo.
+                </p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3>IV. HỒ SƠ DẠY HỌC & PHỤ LỤC</h3>
+        <ul>
+          <li>Phiếu học tập số 1 (Hình thành kiến thức) & Phiếu học tập số 2 (Luyện tập trắc nghiệm).</li>
+          <li>Đường dẫn học tập trực quan tương tác bổ trợ: <code>https://toan10dodo.vercel.app</code></li>
+        </ul>
+      `;
+
+      $('lessonOutput').innerHTML = html;
+    }
+
+    $('btnGenPlan').onclick = renderLessonPlan;
+    $('lpTopic').onchange = renderLessonPlan;
+
+    $('btnPrintPlan').onclick = () => {
+      window.print();
+    };
+
+    $('btnCopyPlan').onclick = () => {
+      const text = $('lessonOutput').innerText;
+      navigator.clipboard.writeText(text).then(() => {
+        alert('Đã sao chép nội dung giáo án 5512 vào bộ nhớ tạm! Thầy/Cô có thể dán vào Microsoft Word.');
+      }).catch(() => {
+        alert('Vui lòng chọn và sao chép thủ công.');
+      });
+    };
+
+    // Khởi tạo hiển thị giáo án mặc định
+    renderLessonPlan();
+  </script>
+</body>
+</html>
