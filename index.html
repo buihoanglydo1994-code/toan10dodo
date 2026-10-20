@@ -4,6 +4,10 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Khám phá Vectơ | Toán 10</title>
+  <!-- KaTeX CSS & JS để render công thức chuẩn toán học -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
   <style>
     :root {
       font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
@@ -54,7 +58,7 @@
       padding: 15px;
       margin: 14px 0;
       text-align: center;
-      font-size: 20px;
+      font-size: 21px;
       color: #104b91;
     }
     .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
@@ -158,7 +162,7 @@
   <header>
     <div class="tag" style="display:inline-block">WEBSITE HỌC TẬP TƯƠNG TÁC</div>
     <h1>KHÁM PHÁ VECTƠ</h1>
-    <p>Toán 10 · Học bằng trực quan · Thực hành · Soạn bài chuẩn CV 5512</p>
+    <p>Toán 10 · Chuẩn ký hiệu hình học & đại số · Soạn bài chuẩn CV 5512</p>
   </header>
 
   <main class="wrap">
@@ -175,22 +179,22 @@
     <section class="panel active" id="theory">
       <article class="card">
         <h2>1. Vectơ là gì?</h2>
-        <p>Vectơ là một đoạn thẳng có hướng. Vectơ AB có điểm đầu A, điểm cuối B và độ dài bằng độ dài đoạn thẳng AB.</p>
-        <div class="formula">→AB &nbsp; |→AB| = AB</div>
+        <p>Vectơ là một đoạn thẳng có hướng. Vectơ \( \vec{AB} \) có điểm đầu \( A \), điểm cuối \( B \) và độ dài bằng độ dài đoạn thẳng \( AB \).</p>
+        <div class="formula">\( \vec{AB} \quad ; \quad |\vec{AB}| = AB \)</div>
         <p><b>Hai vectơ cùng phương:</b> Giá của chúng song song hoặc trùng nhau.</p>
-        <p><b>Hai vectơ bằng nhau:</b> Cùng hướng và cùng độ dài.</p>
-        <p><b>Vectơ đối:</b> Cùng độ dài và ngược hướng.</p>
-        <p><b>Vectơ không:</b> Có điểm đầu trùng điểm cuối.</p>
+        <p><b>Hai vectơ bằng nhau:</b> Cùng hướng và cùng độ dài: \( \vec{a} = \vec{b} \iff \begin{cases} \vec{a} \uparrow\uparrow \vec{b} \\ |\vec{a}| = |\vec{b}| \end{cases} \)</p>
+        <p><b>Hai vectơ đối nhau:</b> Cùng độ dài và ngược hướng: \( \vec{a} = -\vec{b} \).</p>
+        <p><b>Vectơ-không:</b> Kí hiệu là \( \vec{0} \), có điểm đầu trùng điểm cuối \( (\vec{AA} = \vec{0}) \), cùng phương cùng hướng với mọi vectơ.</p>
       </article>
       <article class="card">
         <h2>2. Công thức trọng tâm</h2>
         <div class="grid">
-          <div class="formula">→AB + →BC = →AC</div>
-          <div class="formula">a⃗ − b⃗ = a⃗ + (−b⃗)</div>
-          <div class="formula">a⃗·b⃗ = |a⃗||b⃗|cos α</div>
-          <div class="formula">|(x; y)| = √(x² + y²)</div>
+          <div class="formula">\( \vec{AB} + \vec{BC} = \vec{AC} \)</div>
+          <div class="formula">\( \vec{a} - \vec{b} = \vec{a} + (-\vec{b}) \)</div>
+          <div class="formula">\( \vec{a} \cdot \vec{b} = |\vec{a}| \cdot |\vec{b}| \cos(\vec{a}, \vec{b}) \)</div>
+          <div class="formula">\( |\vec{u}| = \sqrt{x^2 + y^2} \quad \text{với } \vec{u} = (x; y) \)</div>
         </div>
-        <p class="muted">Trong công thức tích vô hướng, α là góc giữa hai vectơ khác vectơ không.</p>
+        <p class="muted">Trong công thức tích vô hướng, \( (\vec{a}, \vec{b}) \) là góc giữa hai vectơ khác vectơ-không \( (0^\circ \le (\vec{a}, \vec{b}) \le 180^\circ) \).</p>
       </article>
     </section>
 
@@ -198,28 +202,28 @@
     <section class="panel" id="explore">
       <article class="card">
         <h2>Phòng thí nghiệm vectơ</h2>
-        <p>Kéo hai điểm A, B trên mặt phẳng tọa độ để khám phá tọa độ và độ dài vectơ AB.</p>
+        <p>Kéo hai điểm \( A, B \) trên mặt phẳng tọa độ để khám phá tọa độ và độ dài của \( \vec{AB} \).</p>
         <svg class="graph" id="graph" viewBox="0 0 360 340" aria-label="Đồ thị vectơ kéo thả"></svg>
         <div class="formula" id="coord"></div>
         <button class="btn primary" id="reset">Đặt lại</button>
-        <p class="muted">Quy tắc: tọa độ vectơ AB bằng tọa độ B trừ tọa độ A.</p>
+        <p class="muted">Quy tắc tọa độ: Cho \( A(x_A; y_A) \) và \( B(x_B; y_B) \), ta có \( \vec{AB} = (x_B - x_A;\; y_B - y_A) \).</p>
       </article>
     </section>
 
     <!-- Tab 3: Phép toán -->
     <section class="panel" id="operations">
       <article class="card">
-        <h2>Thử nghiệm các phép toán</h2>
-        <p>Điều chỉnh tọa độ hai vectơ và quan sát kết quả.</p>
+        <h2>Thử nghiệm các phép toán vectơ</h2>
+        <p>Điều chỉnh tọa độ hai vectơ \( \vec{a} \) và \( \vec{b} \) bằng thanh trượt rồi chọn phép toán:</p>
         <div class="grid" id="controls"></div>
         <p>
-          <button class="btn primary" data-op="add">a⃗ + b⃗</button> 
-          <button class="btn" data-op="sub">a⃗ − b⃗</button> 
-          <button class="btn" data-op="dot">a⃗ · b⃗</button>
+          <button class="btn primary" data-op="add">\( \vec{a} + \vec{b} \)</button> 
+          <button class="btn" data-op="sub">\( \vec{a} - \vec{b} \)</button> 
+          <button class="btn" data-op="dot">\( \vec{a} \cdot \vec{b} \)</button>
         </p>
         <svg class="graph" id="opgraph" viewBox="0 0 360 340"></svg>
         <div class="formula" id="opresult"></div>
-        <p class="muted">Màu xanh dương: a⃗ · Màu cam: b⃗ · Màu xanh lá: vectơ kết quả. Các vectơ vượt ngoài khung sẽ được thu nhỏ đồng đều để hiển thị.</p>
+        <p class="muted">Màu xanh dương: \( \vec{a} \) · Màu cam: \( \vec{b} \) · Màu xanh lá: vectơ kết quả. Đồ thị tự động co tỉ lệ khi vượt quá giới hạn.</p>
       </article>
     </section>
 
@@ -241,21 +245,21 @@
     <section class="panel" id="real">
       <article class="card">
         <h2>Ứng dụng 1: Robot di chuyển</h2>
-        <p>Robot đi 3 m về phía Đông, sau đó đi 4 m về phía Bắc. Tính độ lớn độ dời.</p>
+        <p>Robot đi 3 m về phía Đông, sau đó đi 4 m về phía Bắc. Tính độ lớn độ dời tổng cộng.</p>
         <button class="btn primary" data-reveal="r1">Hiện lời giải</button>
-        <div class="formula" id="r1" hidden>√(3² + 4²) = 5 m</div>
+        <div class="formula" id="r1" hidden>\( |\vec{d}| = \sqrt{3^2 + 4^2} = 5\text{ m} \)</div>
       </article>
       <article class="card">
         <h2>Ứng dụng 2: Tổng hợp lực</h2>
-        <p>Hai lực vuông góc có độ lớn 6 N và 8 N. Tính độ lớn hợp lực.</p>
+        <p>Hai lực vuông góc có độ lớn \( F_1 = 6\text{ N} \) và \( F_2 = 8\text{ N} \). Tính độ lớn hợp lực \( \vec{F} = \vec{F}_1 + \vec{F}_2 \).</p>
         <button class="btn primary" data-reveal="r2">Hiện lời giải</button>
-        <div class="formula" id="r2" hidden>√(6² + 8²) = 10 N</div>
+        <div class="formula" id="r2" hidden>\( |\vec{F}| = \sqrt{F_1^2 + F_2^2} = \sqrt{6^2 + 8^2} = 10\text{ N} \)</div>
       </article>
       <article class="card">
         <h2>Ứng dụng 3: Thiết bị bay</h2>
-        <p>Thiết bị bay di chuyển theo a⃗ = (4; 2), rồi b⃗ = (−1; 3). Tính vectơ độ dời tổng và độ dài.</p>
+        <p>Thiết bị bay di chuyển theo vectơ \( \vec{a} = (4; 2) \), sau đó tiếp tục bay theo \( \vec{b} = (-1; 3) \). Tính vectơ độ dời tổng và độ dài của nó.</p>
         <button class="btn primary" data-reveal="r3">Hiện lời giải</button>
-        <div class="formula" id="r3" hidden>a⃗ + b⃗ = (3; 5), độ dài √34</div>
+        <div class="formula" id="r3" hidden>\( \vec{d} = \vec{a} + \vec{b} = (3; 5) \implies |\vec{d}| = \sqrt{3^2 + 5^2} = \sqrt{34} \approx 5{,}83 \)</div>
       </article>
     </section>
 
@@ -297,9 +301,7 @@
         </div>
 
         <!-- Vùng hiển thị giáo án -->
-        <div id="lessonOutput" class="lesson-preview">
-          <!-- Sẽ được điền tự động bằng Javascript -->
-        </div>
+        <div id="lessonOutput" class="lesson-preview"></div>
       </article>
     </section>
   </main>
@@ -309,10 +311,26 @@
   <script>
     const $ = id => document.getElementById(id);
 
+    // Hàm render lại KaTeX cho một phần tử
+    function renderMath(element) {
+      if (window.renderMathInElement && element) {
+        renderMathInElement(element, {
+          delimiters: [
+            {left: '$$', right: '$$', display: true},
+            {left: '\\[', right: '\\]', display: true},
+            {left: '\\(', right: '\\)', display: false},
+            {left: '$', right: '$', display: false}
+          ],
+          throwOnError: false
+        });
+      }
+    }
+
     // Xử lý chuyển tab
     document.querySelectorAll('[data-tab]').forEach(b => b.onclick = () => {
       document.querySelectorAll('[data-tab]').forEach(x => x.classList.toggle('active', x === b));
       document.querySelectorAll('.panel').forEach(x => x.classList.toggle('active', x.id === b.dataset.tab));
+      renderMath(document.body);
     });
 
     // Hệ tọa độ & SVG
@@ -341,7 +359,9 @@
       });
       $('graph').innerHTML = s;
       let dx = B[0] - A[0], dy = B[1] - A[1];
-      $('coord').textContent = `A(${A.join('; ')}), B(${B.join('; ')}) | →AB = (${dx}; ${dy}) | Độ dài = ${Math.hypot(dx, dy).toFixed(2)}`;
+      let len = Math.hypot(dx, dy).toFixed(2);
+      $('coord').innerHTML = `\\( A(${A.join(';\\;')}),\\; B(${B.join(';\\;')}) \\implies \\vec{AB} = (${dx};\\; ${dy}) \\quad ; \\quad |\\vec{AB}| = ${len} \\)`;
+      renderMath($('coord'));
     }
 
     let g = $('graph');
@@ -365,7 +385,9 @@
 
     // Tab Phép toán
     let vals = [2, 1, 1, 3], op = 'add';
-    $('controls').innerHTML = ['aₓ', 'aᵧ', 'bₓ', 'bᵧ'].map((t, i) => `<label><b>${t}: <span id="val${i}">${vals[i]}</span></b><input type="range" min="-4" max="4" step="1" value="${vals[i]}" data-input="${i}"></label>`).join('');
+    const varNames = ['a_x', 'a_y', 'b_x', 'b_y'];
+    $('controls').innerHTML = varNames.map((t, i) => `<label><b>\\( ${t} \\): <span id="val${i}">${vals[i]}</span></b><input type="range" min="-4" max="4" step="1" value="${vals[i]}" data-input="${i}"></label>`).join('');
+    
     document.querySelectorAll('[data-input]').forEach(e => e.oninput = () => {
       vals[+e.dataset.input] = +e.value;
       $('val' + e.dataset.input).textContent = e.value;
@@ -382,30 +404,39 @@
           scale = Math.max(1, ...a.map(Math.abs), ...b.map(Math.abs), ...(op === 'dot' ? [] : r.map(Math.abs))) / 5;
       let shrink = p => p.map(v => v / scale);
       $('opgraph').innerHTML = base() + arrow([0, 0], shrink(a), '#1576c5') + arrow([0, 0], shrink(b), '#e89622') + (op === 'dot' ? '' : arrow([0, 0], shrink(r), '#169b79'));
-      $('opresult').textContent = op === 'dot' ? `a⃗ · b⃗ = ${a[0] * b[0] + a[1] * b[1]}` : `${op === 'add' ? 'a⃗ + b⃗' : 'a⃗ − b⃗'} = (${r[0]}; ${r[1]})`;
+      
+      let dotProd = a[0] * b[0] + a[1] * b[1];
+      if (op === 'dot') {
+        $('opresult').innerHTML = `\\( \\vec{a} \\cdot \\vec{b} = a_x b_x + a_y b_y = (${a[0]})(${b[0]}) + (${a[1]})(${b[1]}) = ${dotProd} \\)`;
+      } else if (op === 'add') {
+        $('opresult').innerHTML = `\\( \\vec{a} + \\vec{b} = (${a[0]} + ${b[0]};\\; ${a[1]} + ${b[1]}) = (${r[0]};\\; ${r[1]}) \\)`;
+      } else {
+        $('opresult').innerHTML = `\\( \\vec{a} - \\vec{b} = (${a[0]} - (${b[0]});\\; ${a[1]} - (${b[1]})) = (${r[0]};\\; ${r[1]}) \\)`;
+      }
+      renderMath($('opresult'));
     }
     drawOp();
 
-    // Tab Trắc nghiệm
+    // Tab Trắc nghiệm với công thức chuẩn LaTeX
     const qs = [
-      ['Vectơ là gì?', ['Một đoạn thẳng có hướng', 'Một đường thẳng', 'Một điểm', 'Một đoạn thẳng bất kỳ'], 0, 'Vectơ là đoạn thẳng có hướng.'],
-      ['A(1; 2), B(4; 6). Tọa độ AB là:', ['(5; 8)', '(3; 4)', '(−3; −4)', '(4; 3)'], 1, 'Lấy tọa độ B trừ tọa độ A.'],
-      ['Độ dài vectơ (3; 4) bằng:', ['7', '25', '5', '1'], 2, '√(9+16)=5.'],
-      ['Hai vectơ bằng nhau khi:', ['Cùng phương', 'Cùng độ dài', 'Cùng hướng và cùng độ dài', 'Chung điểm đầu'], 2, 'Cần cùng hướng và cùng độ dài.'],
-      ['(2; −1) + (3; 4) bằng:', ['(5; 3)', '(1; 5)', '(6; −4)', '(−1; −5)'], 0, 'Cộng từng tọa độ.'],
-      ['Tích vô hướng của (2; 3) và (4; −1) là:', ['11', '5', '−5', '8'], 1, '2×4 + 3×(−1)=5.'],
-      ['Nếu hai vectơ khác không có tích vô hướng bằng 0 thì chúng:', ['Cùng hướng', 'Vuông góc', 'Bằng nhau', 'Đối nhau'], 1, 'Hai vectơ vuông góc.'],
-      ['3(1; −2) bằng:', ['(3; −6)', '(4; 1)', '(3; 6)', '(1; −6)'], 0, 'Nhân từng tọa độ với 3.']
+      ['Khái niệm: Vectơ là gì?', ['Một đoạn thẳng có hướng', 'Một đường thẳng', 'Một điểm', 'Một đoạn thẳng bất kỳ'], 0, 'Vectơ là đoạn thẳng có hướng (có điểm đầu và điểm cuối xác định).'],
+      ['Cho hai điểm $A(1; 2)$ và $B(4; 6)$. Tọa độ của $\\vec{AB}$ là:', ['$(5; 8)$', '$(3; 4)$', '$(-3; -4)$', '$(4; 3)$'], 1, 'Tọa độ $\\vec{AB} = (x_B - x_A;\\; y_B - y_A) = (4 - 1;\\; 6 - 2) = (3; 4)$.'],
+      ['Độ dài của vectơ $\\vec{u} = (3; 4)$ bằng:', ['7', '25', '5', '1'], 2, 'Ta có $|\\vec{u}| = \\sqrt{3^2 + 4^2} = \\sqrt{25} = 5$.'],
+      ['Hai vectơ $\\vec{a}$ và $\\vec{b}$ bằng nhau $(\\vec{a} = \\vec{b})$ khi và chỉ khi:', ['Cùng phương', 'Cùng độ dài', 'Cùng hướng và cùng độ dài', 'Chung điểm đầu'], 2, 'Hai vectơ bằng nhau khi chúng cùng hướng và cùng độ dài.'],
+      ['Cho $\\vec{a} = (2; -1)$ và $\\vec{b} = (3; 4)$. Vectơ tổng $\\vec{a} + \\vec{b}$ bằng:', ['$(5; 3)$', '$(1; 5)$', '$(6; -4)$', '$(-1; -5)$'], 0, 'Cộng từng tọa độ tương ứng: $(2+3;\\; -1+4) = (5; 3)$.'],
+      ['Tích vô hướng của $\\vec{a} = (2; 3)$ và $\\vec{b} = (4; -1)$ là:', ['11', '5', '$-5$', '8'], 1, 'Ta có $\\vec{a} \\cdot \\vec{b} = 2 \\times 4 + 3 \\times (-1) = 8 - 3 = 5$.'],
+      ['Nếu hai vectơ $\\vec{a}, \\vec{b} \\neq \\vec{0}$ thỏa mãn $\\vec{a} \\cdot \\vec{b} = 0$ thì:', ['$\\vec{a}$ cùng hướng $\\vec{b}$', '$\\vec{a} \\perp \\vec{b}$ (vuông góc)', '$\\vec{a} = \\vec{b}$', '$\\vec{a} = -\\vec{b}$'], 1, 'Vì $\\vec{a} \\cdot \\vec{b} = |\\vec{a}||\\vec{b}|\\cos 90^\\circ = 0$ nên hai vectơ vuông góc nhau.'],
+      ['Cho vectơ $\\vec{u} = (1; -2)$. Vectơ $3\\vec{u}$ có tọa độ là:', ['$(3; -6)$', '$(4; 1)$', '$(3; 6)$', '$(1; -6)$'], 0, 'Nhân cả hoành độ và tung độ với $3$: $3(1; -2) = (3; -6)$.']
     ];
     let qi = 0, choice = null, score = 0, done = false;
     function show() {
       choice = null; done = false; let q = qs[qi];
       $('progress').textContent = `Câu ${qi + 1}/${qs.length}`;
-      $('question').textContent = q[0];
+      $('question').innerHTML = q[0];
       $('options').innerHTML = '';
       q[1].forEach((s, i) => {
         let b = document.createElement('button');
-        b.textContent = 'ABCD'[i] + '. ' + s;
+        b.innerHTML = '<b>' + 'ABCD'[i] + '.</b> ' + s;
         b.onclick = () => {
           if (done) return;
           choice = i;
@@ -415,18 +446,20 @@
       });
       $('feedback').textContent = '';
       $('check').hidden = false; $('next').hidden = true; $('again').hidden = true;
+      renderMath($('quiz'));
     }
     $('check').onclick = () => {
       if (choice === null) { $('feedback').textContent = 'Vui lòng chọn một đáp án.'; return; }
       done = true; let q = qs[qi], ok = choice === q[2];
       if (ok) score++;
       $('feedback').style.color = ok ? '#118360' : '#b45b21';
-      $('feedback').textContent = (ok ? '✓ Chính xác! ' : '✗ Chưa chính xác. ') + q[3];
+      $('feedback').innerHTML = (ok ? '✓ Chính xác! ' : '✗ Chưa chính xác. ') + q[3];
       $('check').hidden = true;
       if (qi === qs.length - 1) {
-        $('feedback').textContent += ` Kết quả: ${score}/${qs.length} câu đúng.`;
+        $('feedback').innerHTML += `<br><b>Kết quả: ${score}/${qs.length} câu đúng.</b>`;
         $('again').hidden = false;
       } else $('next').hidden = false;
+      renderMath($('feedback'));
     };
     $('next').onclick = () => { qi++; show(); };
     $('again').onclick = () => { qi = 0; score = 0; show(); };
@@ -437,6 +470,7 @@
       let x = $(b.dataset.reveal);
       x.hidden = !x.hidden;
       b.textContent = x.hidden ? 'Hiện lời giải' : 'Ẩn lời giải';
+      if (!x.hidden) renderMath(x);
     });
 
     // ==========================================
@@ -449,7 +483,7 @@
         muctieu_nl: "Năng lực tư duy và lập luận toán học: nhận biết quan hệ cùng hướng, ngược hướng; Năng lực mô hình hóa toán học: mô tả các đại lượng có hướng trong vật lí (lực, vận tốc, độ dời).",
         muctieu_pc: "Chăm chỉ, tích cực tham gia các hoạt động tìm tòi khám phá, cẩn thận và chính xác trong biểu diễn hình học.",
         hd1: "Quan sát chuyển động của máy bay và tàu thuyền trên bản đồ rada. Đặt vấn đề: Một đại lượng vừa có độ lớn vừa có hướng được mô tả trong toán học như thế nào?",
-        hd2: "1. Định nghĩa vectơ và kí hiệu.<br>2. Hai vectơ cùng phương, cùng hướng, ngược hướng.<br>3. Hai vectơ bằng nhau và vectơ-không.",
+        hd2: "1. Định nghĩa vectơ và kí hiệu: \\( \\vec{AB},\\; \\vec{a} \\).<br>2. Hai vectơ cùng phương, cùng hướng: \\( \\vec{a} \\uparrow\\uparrow \\vec{b} \\), ngược hướng \\( \\vec{a} \\uparrow\\downarrow \\vec{b} \\).<br>3. Hai vectơ bằng nhau: \\( \\vec{a} = \\vec{b} \\iff \\begin{cases} \\vec{a} \\uparrow\\uparrow \\vec{b} \\\\ |\\vec{a}| = |\\vec{b}| \\end{cases} \\) và vectơ-không \\( \\vec{0} \\).",
         hd3: "Làm bài tập nhận biết các cặp vectơ cùng hướng, bằng nhau trên hình bình hành, hình vuông và lục giác đều.",
         hd4: "Ứng dụng trong việc xác định hướng chuyển động của robot định vị và hướng gió trong thực tế."
       },
@@ -459,8 +493,8 @@
         muctieu_nl: "Năng lực giải quyết vấn đề toán học thông qua việc tổng hợp hai lực đồng quy, cộng các độ dời liên tiếp.",
         muctieu_pc: "Trách nhiệm và tinh thần hợp tác nhóm khi thảo luận thực hiện các quy tắc hình học.",
         hd1: "Bài toán di chuyển: Một chất điểm chuyển động từ A đến B, sau đó từ B đến C. Vị trí cuối cùng so với ban đầu được mô tả qua quy tắc nào?",
-        hd2: "1. Tổng hai vectơ và Quy tắc 3 điểm: AB + BC = AC.<br>2. Quy tắc hình bình hành.<br>3. Tính chất phép cộng và vectơ đối, quy tắc hiệu.",
-        hd3: "Áp dụng rút gọn các biểu thức vectơ dạng: AB + CD + BC; tính độ dài vectơ tổng hai lực vuông góc.",
+        hd2: "1. Quy tắc 3 điểm: \\( \\vec{AB} + \\vec{BC} = \\vec{AC} \\).<br>2. Quy tắc hình bình hành: Nếu \\( ABCD \\) là hình bình hành thì \\( \\vec{AB} + \\vec{AD} = \\vec{AC} \\).<br>3. Vectơ đối và quy tắc hiệu: \\( \\vec{AB} - \\vec{AC} = \\vec{CB} \\); \\( \\vec{a} - \\vec{b} = \\vec{a} + (-\\vec{b}) \\).",
+        hd3: "Áp dụng rút gọn các biểu thức vectơ: \\( \\vec{AB} + \\vec{CD} + \\vec{BC} = \\vec{AD} \\); tính độ dài vectơ tổng hai lực vuông góc.",
         hd4: "Xác định hướng và vận tốc thực tế của chiếc thuyền khi chèo qua sông có dòng nước chảy xiết."
       },
       tich_so: {
@@ -469,18 +503,18 @@
         muctieu_nl: "Năng lực tư duy đại số kết hợp hình học; mô tả trọng tâm tam giác, trung điểm đoạn thẳng bằng ngôn ngữ vectơ.",
         muctieu_pc: "Tự giác tìm tòi cách biến đổi hệ thức vectơ tối ưu nhất.",
         hd1: "Xét hai vectơ cùng hướng và một vectơ gấp đôi độ dài vectơ kia. Làm thế nào để biểu thị mối liên hệ bằng một biểu thức số học?",
-        hd2: "1. Định nghĩa tích k.a⃗ và quy ước hướng.<br>2. Các tính chất đại số.<br>3. Trung điểm và Trọng tâm: IA + IB = 0; GA + GB + GC = 0.",
-        hd3: "Chứng minh ba điểm thẳng hàng, phân tích vectơ AM theo hai vectơ cạnh AB và AC.",
+        hd2: "1. Định nghĩa tích \\( k\\vec{a} \\): cùng hướng khi \\( k > 0 \\), ngược hướng khi \\( k < 0 \\); \\( |k\\vec{a}| = |k| \\cdot |\\vec{a}| \\).<br>2. Trung điểm: \\( I \\) là trung điểm \\( AB \\iff \\vec{IA} + \\vec{IB} = \\vec{0} \\iff \\vec{MA} + \\vec{MB} = 2\\vec{MI} \\).<br>3. Trọng tâm: \\( G \\) là trọng tâm \\( \\triangle ABC \\iff \\vec{GA} + \\vec{GB} + \\vec{GC} = \\vec{0} \\).",
+        hd3: "Chứng minh ba điểm thẳng hàng thông qua hệ thức \\( \\vec{AB} = k\\vec{AC} \\); phân tích vectơ theo hai vectơ không cùng phương.",
         hd4: "Ứng dụng tìm trọng tâm của vật thể phẳng trong thiết kế xây dựng và cơ học kỹ thuật."
       },
       tich_vo_huong: {
         title: "BÀI 4: TÍCH VÔ HƯỚNG CỦA HAI VECTƠ",
-        muctieu_kt: "Hiểu góc giữa hai vectơ, công thức định nghĩa tích vô hướng a⃗·b⃗ = |a⃗||b⃗|cos α; điều kiện hai vectơ vuông góc; các tính chất đại số.",
-        muctieu_nl: "Năng lực mô hình hóa công cơ học trong Vật lí (A = F.s.cos α); tính góc và chứng minh quan hệ vuông góc trong hình phẳng.",
+        muctieu_kt: "Hiểu góc giữa hai vectơ; công thức định nghĩa tích vô hướng; điều kiện hai vectơ vuông góc; các tính chất đại số.",
+        muctieu_nl: "Năng lực mô hình hóa công cơ học trong Vật lí \\( (A = F \\cdot s \\cdot \\cos \\alpha) \\); tính góc và chứng minh quan hệ vuông góc.",
         muctieu_pc: "Kiên trì và cẩn thận trong việc xác định đúng góc giữa hai vectơ khi chúng không chung gốc.",
-        hd1: "Bài toán kéo xe: Một người kéo xe hàng đi trên mặt đường nằm ngang với lực F hợp với phương chuyển động một góc α. Công sinh ra tính như thế nào?",
-        hd2: "1. Khái niệm góc giữa hai vectơ.<br>2. Định nghĩa tích vô hướng và các trường hợp đặc biệt (bình phương vô hướng, vuông góc).<br>3. Tính chất phân phối và hằng đẳng thức vectơ.",
-        hd3: "Tính tích vô hướng trong tam giác đều cạnh a, tính góc giữa hai đường chéo hình thang vuông.",
+        hd1: "Bài toán kéo xe: Một người kéo xe hàng đi trên mặt đường nằm ngang với lực \\( \\vec{F} \\) hợp với phương chuyển động một góc \\( \\alpha \\). Công sinh ra tính như thế nào?",
+        hd2: "1. Khái niệm góc \\( (\\vec{a}, \\vec{b}) \\) với \\( 0^\\circ \\le (\\vec{a}, \\vec{b}) \\le 180^\\circ \\).<br>2. Công thức: \\( \\vec{a} \\cdot \\vec{b} = |\\vec{a}| \\cdot |\\vec{b}| \\cos(\\vec{a}, \\vec{b}) \\).<br>3. Điều kiện vuông góc: \\( \\vec{a} \\perp \\vec{b} \\iff \\vec{a} \\cdot \\vec{b} = 0 \\).<br>4. Bình phương vô hướng: \\( \\vec{a}^2 = |\\vec{a}|^2 \\).",
+        hd3: "Tính tích vô hướng trong tam giác đều cạnh a; tính góc giữa hai đường chéo hình thang vuông.",
         hd4: "Tối ưu hóa góc kéo dây cáp để công sinh ra lớn nhất trong ngành vận tải và cần cẩu hàng hóa."
       },
       toa_do: {
@@ -489,8 +523,8 @@
         muctieu_nl: "Năng lực chuyển đổi linh hoạt giữa ngôn ngữ hình học thuần túy và ngôn ngữ đại số giải tích.",
         muctieu_pc: "Rèn luyện tính chính xác, tính toán cẩn thận không nhầm lẫn dấu tọa độ.",
         hd1: "Làm thế nào để máy tính và màn hình GPS định vị chính xác vị trí và hướng bay của máy bay trên bản đồ số?",
-        hd2: "1. Trục tọa độ và hệ trục Oxy.<br>2. Biểu diễn vectơ qua hai vectơ đơn vị i và j.<br>3. Công thức tọa độ phép toán và độ dài: u = (x; y) => |u| = √(x² + y²).",
-        hd3: "Tìm tọa độ điểm D để ABCD là hình bình hành; tính khoảng cách giữa hai điểm A(xA, yA) và B(xB, yB).",
+        hd2: "1. Biểu diễn vectơ: \\( \\vec{u} = x\\vec{i} + y\\vec{j} \\iff \\vec{u} = (x; y) \\).<br>2. Phép toán tọa độ: \\( \\vec{u} \\pm \\vec{v} = (x_1 \\pm x_2;\\; y_1 \\pm y_2) \\); \\( k\\vec{u} = (kx; ky) \\).<br>3. Tích vô hướng & độ dài: \\( \\vec{u} \\cdot \\vec{v} = x_1 x_2 + y_1 y_2 \\); \\( |\\vec{u}| = \\sqrt{x^2 + y^2} \\).",
+        hd3: "Tìm tọa độ điểm D để ABCD là hình bình hành; tính khoảng cách giữa hai điểm \\( A(x_A; y_A) \\) và \\( B(x_B; y_B) \\).",
         hd4: "Mô phỏng đường đi của nhân vật trong game 2D bằng hệ tọa độ vectơ trên màn hình máy tính."
       }
     };
@@ -615,6 +649,7 @@
       `;
 
       $('lessonOutput').innerHTML = html;
+      renderMath($('lessonOutput'));
     }
 
     $('btnGenPlan').onclick = renderLessonPlan;
@@ -633,7 +668,12 @@
       });
     };
 
-    // Khởi tạo hiển thị giáo án mặc định
+    // Khi trang tải xong, kích hoạt KaTeX
+    window.addEventListener('DOMContentLoaded', () => {
+      renderLessonPlan();
+      renderMath(document.body);
+    });
+    // Kích hoạt ban đầu
     renderLessonPlan();
   </script>
 </body>
